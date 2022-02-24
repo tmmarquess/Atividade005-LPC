@@ -1,8 +1,8 @@
 import pygame
 import config
-import Obstacle
-import Player
-import Bullet
+import obstacle
+import player
+import bullet
 
 
 # Check collision between bullet and obstacle,
@@ -19,13 +19,13 @@ def bullet_obstacle_collide():
 def add_bullet():
     global bullets
     if len(bullets.sprites()) <= config.max_bullets_per_time:
-        bullets.add(Bullet.Bullet(player.sprite.get_top_coordinates()))
+        bullets.add(bullet.Bullet(gamer.sprite.get_top_coordinates()))
 
 
 # Adds an obstacle every time the event is triggered
 def add_obstacle():
     global obstacles
-    obstacles.add(Obstacle.Obstacle())
+    obstacles.add(obstacle.Obstacle())
 
 
 # Get the initialized Screen instance
@@ -35,8 +35,8 @@ screen = config.initialize_screen()
 clock = pygame.time.Clock()
 
 # Creating the player group
-player = pygame.sprite.GroupSingle()
-player.add(Player.Player())
+gamer = pygame.sprite.GroupSingle()
+gamer.add(player.Player())
 
 # Creating the obstacles group
 obstacles = pygame.sprite.Group()
@@ -63,7 +63,7 @@ while True:
 
         # Check if the player shoots a bullet
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE:
+            if event.key == pygame.K_f:
                 add_bullet()
 
     # Drawing the elements on the screen
@@ -72,8 +72,8 @@ while True:
     bullets.draw(screen)
     bullets.update()
 
-    player.draw(screen)
-    player.update()
+    gamer.draw(screen)
+    gamer.update()
 
     obstacles.draw(screen)
     obstacles.update()

@@ -33,7 +33,7 @@ $ https://github.com/tmmarquess/Atividade005-LPC.git
 $ cd Atividade005-LPC
 
 # Execute o programa
-$ python main.py
+$ python game.py
 ```
 
 ## Jogabilidade 👾

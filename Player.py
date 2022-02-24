@@ -5,8 +5,7 @@ import config
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.Surface((20, 20))
-        self.image.fill("green")
+        self.image = pygame.image.load('image/nave.png')
         self.rect = self.image.get_rect(midbottom=(config.screen_width // 2, config.screen_height - 20))
         self.speed = 10
 

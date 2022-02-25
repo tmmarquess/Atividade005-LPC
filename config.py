@@ -1,9 +1,12 @@
 # Screen dimensions
 import pygame
 
+# Background
+bg = pygame.image.load('image/Background.png')
+
 # Defining the screen setup
-screen_width = 500
-screen_height = 700
+screen_width = bg.get_width()
+screen_height = bg.get_height()
 
 # Define the timer witch spawns an obstacle in ms
 obstacle_timer_time = 500

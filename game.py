@@ -1,7 +1,7 @@
 import pygame
 import config
-import obstacle
-import player
+import Obstacle
+import Player
 import bullet
 
 
@@ -25,7 +25,7 @@ def add_bullet():
 # Adds an obstacle every time the event is triggered
 def add_obstacle():
     global obstacles
-    obstacles.add(obstacle.Obstacle())
+    obstacles.add(Obstacle.Obstacle())
 
 
 # Get the initialized Screen instance
@@ -36,7 +36,7 @@ clock = pygame.time.Clock()
 
 # Creating the player group
 gamer = pygame.sprite.GroupSingle()
-gamer.add(player.Player())
+gamer.add(Player.Player())
 
 # Creating the obstacles group
 obstacles = pygame.sprite.Group()
@@ -51,6 +51,9 @@ pygame.time.set_timer(obstacle_timer, config.obstacle_timer_time)
 
 # Game loop
 while True:
+
+    # Background image
+    screen.blit(config.bg, (0, 0))
     for event in pygame.event.get():
         # Check if the user wants to exit
         if event.type == pygame.QUIT:
@@ -67,7 +70,6 @@ while True:
                 add_bullet()
 
     # Drawing the elements on the screen
-    screen.fill("black")
 
     bullets.draw(screen)
     bullets.update()

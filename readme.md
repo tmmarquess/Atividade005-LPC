@@ -45,7 +45,7 @@ O mundo está prestes a ser destruído por uma chuva de asteroides, e a única f
 Destruir os asteroides que entrarem no seu caminho e obter a maior pontuação possível
 
 ### Controles  🎮
- - *ainda em desenvolvimento*
+  <img src="img/controls.png" width="350px" alt="game controls">
 
 
 ## Como contribuir? 🤔
@@ -60,7 +60,7 @@ Para contribuir com o jogo, siga estas etapas:
 4. Envie para o repositório remoto: `git push`
 5. Crie a pull request.
 
-Para saber mais sobre como fazer um pull request, consulte a documentação do GitHub em [como criar um pull request](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
+Para saber mais sobre como fazer um pull request, consulte a documentação do GitHub em [como criar um pull request](https://help.github.com/pt/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request).
 
 ## Colaboradores 🤝🏼
 

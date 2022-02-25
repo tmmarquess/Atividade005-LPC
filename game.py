@@ -1,8 +1,8 @@
 import pygame
 import config
 import Obstacle
-import Player
 import bullet
+import player
 
 
 # Check collision between bullet and obstacle,
@@ -36,7 +36,7 @@ clock = pygame.time.Clock()
 
 # Creating the player group
 gamer = pygame.sprite.GroupSingle()
-gamer.add(Player.Player())
+gamer.add(player.Player())
 
 # Creating the obstacles group
 obstacles = pygame.sprite.Group()
@@ -51,9 +51,6 @@ pygame.time.set_timer(obstacle_timer, config.obstacle_timer_time)
 
 # Game loop
 while True:
-
-    # Background image
-    screen.blit(config.bg, (0, 0))
     for event in pygame.event.get():
         # Check if the user wants to exit
         if event.type == pygame.QUIT:
@@ -70,6 +67,7 @@ while True:
                 add_bullet()
 
     # Drawing the elements on the screen
+    screen.blit(config.bg, (0, 0))
 
     bullets.draw(screen)
     bullets.update()

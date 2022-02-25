@@ -2,7 +2,7 @@
 import pygame
 
 # Background
-bg = pygame.image.load('image/Background.png')
+bg = pygame.image.load('img/Background.png')
 
 # Defining the screen setup
 screen_width = bg.get_width()
@@ -20,6 +20,8 @@ fps = 60
 
 # Initialize pygame and returns a screen instance
 def initialize_screen():
+    global bg
     pygame.init()
     screen = pygame.display.set_mode((screen_width, screen_height))
+    bg = bg.convert()
     return screen

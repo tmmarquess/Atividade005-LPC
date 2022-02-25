@@ -49,6 +49,12 @@ bullets = pygame.sprite.Group()
 obstacle_timer = pygame.USEREVENT + 1
 pygame.time.set_timer(obstacle_timer, config.obstacle_timer_time)
 
+obstacle_timer_qtd = pygame.USEREVENT + 2
+pygame.time.set_timer(obstacle_timer_qtd, config.obstacle_timer_qtd)
+
+obstacle_timer_vel = pygame.USEREVENT + 3
+pygame.time.set_timer(obstacle_timer_vel, config.obstacle_timer_vel)
+
 # Game loop
 while True:
     for event in pygame.event.get():
@@ -65,6 +71,18 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_f:
                 add_bullet()
+
+        # increase the quantity of comets
+        if event.type == obstacle_timer_qtd:
+            config.obstacle_timer_time *= 0.98
+            config.obstacle_timer_time = int(config.obstacle_timer_time)
+            pygame.time.set_timer(obstacle_timer, config.obstacle_timer_time)
+            print(config.obstacle_timer_time)
+
+        # increase the speed of the comets
+        if event.type == obstacle_timer_vel:
+            config.ini_vel += config.dt_vel
+            
 
     # Drawing the elements on the screen
     screen.blit(config.bg, (0, 0))

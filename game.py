@@ -1,6 +1,6 @@
 import pygame
 import config
-import Obstacle
+import obstacle
 import bullet
 import player
 
@@ -25,7 +25,7 @@ def add_bullet():
 # Adds an obstacle every time the event is triggered
 def add_obstacle():
     global obstacles
-    obstacles.add(Obstacle.Obstacle())
+    obstacles.add(obstacle.Obstacle())
 
 
 # Get the initialized Screen instance

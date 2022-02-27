@@ -3,10 +3,27 @@ import config
 import obstacle
 import bullet
 import player
-import os
 
 score = 0
 WHITE = (255, 255, 255)
+
+# Check collision between bullet and obstacle,
+# and kills them both if they collide
+def bullet_obstacle_collide(score):
+    for bullet in bullets.sprites():
+        collision = pygame.sprite.spritecollide(bullet, obstacles, True)
+        if collision:
+            bullet.kill()
+            
+            update_score()
+
+# Update score
+def update_score():
+    global text, score, textRect
+    score += 1
+    text = font.render(str(score), True, WHITE)
+    textRect = text.get_rect()
+    textRect.center = (250, 30)
 
 # Shoots a bullet, but there's a maximum
 # of 3 bullets on the screen
@@ -24,6 +41,12 @@ def add_obstacle():
 
 # Get the initialized Screen instance
 screen = config.initialize_screen()
+
+# Text screen 
+font = pygame.font.Font("font/retro_gaming.ttf", 40)
+text = font.render(str(score), True, WHITE)
+textRect = text.get_rect()
+textRect.center = (250, 30)
 
 # Gets the clock instance
 clock = pygame.time.Clock()
@@ -52,8 +75,6 @@ pygame.time.set_timer(obstacle_timer_vel, config.obstacle_timer_vel)
 # Game loop
 while True:
     for event in pygame.event.get():
-        
-        score = 0
 
         # Check if the user wants to exit
         if event.type == pygame.QUIT:
@@ -79,26 +100,9 @@ while True:
         # increase the speed of the comets
         if event.type == obstacle_timer_vel:
             config.ini_vel += config.dt_vel
-        
-        # Check collision between bullet and obstacle,
-        # and kills them both if they collide
-        def bullet_obstacle_collide(score):
-            for bullet in bullets.sprites():
-                collision = pygame.sprite.spritecollide(bullet, obstacles, True)
-                if collision:
-                    bullet.kill()
-                    score += 1
-                    global text
-                    text = font.render(str(score), True, WHITE)
-        
     
     # Drawing the elements on the screen
     screen.blit(config.bg, (0, 0))
-
-    font = pygame.font.Font(os.path.join(os.getcwd(), 'font', 'retro_gaming.ttf'), 40)
-    text = font.render(str(score), True, WHITE)
-    textRect = text.get_rect()
-    textRect.center = (250, 30)
     screen.blit(text, textRect)
 
     bullets.draw(screen)

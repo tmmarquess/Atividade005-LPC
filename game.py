@@ -3,16 +3,10 @@ import config
 import obstacle
 import bullet
 import player
+import os
 
-
-# Check collision between bullet and obstacle,
-# and kills them both if they collide
-def bullet_obstacle_collide():
-    for bullet in bullets.sprites():
-        collision = pygame.sprite.spritecollide(bullet, obstacles, True)
-        if collision:
-            bullet.kill()
-
+score = 0
+WHITE = (255, 255, 255)
 
 # Shoots a bullet, but there's a maximum
 # of 3 bullets on the screen
@@ -58,6 +52,9 @@ pygame.time.set_timer(obstacle_timer_vel, config.obstacle_timer_vel)
 # Game loop
 while True:
     for event in pygame.event.get():
+        
+        score = 0
+
         # Check if the user wants to exit
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -82,10 +79,27 @@ while True:
         # increase the speed of the comets
         if event.type == obstacle_timer_vel:
             config.ini_vel += config.dt_vel
-            
-
+        
+        # Check collision between bullet and obstacle,
+        # and kills them both if they collide
+        def bullet_obstacle_collide(score):
+            for bullet in bullets.sprites():
+                collision = pygame.sprite.spritecollide(bullet, obstacles, True)
+                if collision:
+                    bullet.kill()
+                    score += 1
+                    global text
+                    text = font.render(str(score), True, WHITE)
+        
+    
     # Drawing the elements on the screen
     screen.blit(config.bg, (0, 0))
+
+    font = pygame.font.Font(os.path.join(os.getcwd(), 'font', 'retro_gaming.ttf'), 40)
+    text = font.render(str(score), True, WHITE)
+    textRect = text.get_rect()
+    textRect.center = (250, 30)
+    screen.blit(text, textRect)
 
     bullets.draw(screen)
     bullets.update()
@@ -97,7 +111,7 @@ while True:
     obstacles.update()
 
     # Checking the collision between a bullet and an obstacle
-    bullet_obstacle_collide()
+    bullet_obstacle_collide(score)
 
     # Update pygame screen
     pygame.display.update()

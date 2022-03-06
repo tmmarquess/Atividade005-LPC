@@ -3,9 +3,18 @@ import config
 import obstacle
 import bullet
 import player
-
+pygame.init()
 score = 0
 WHITE = (255, 255, 255)
+# Sounds
+pygame.mixer.music.load("sounds/music.mp3")
+pygame.mixer.music.set_volume(0.05)
+pygame.mixer.music.play(-1)
+sound_collision = pygame.mixer.Sound("sounds/collision.wav")
+sound_shoot = pygame.mixer.Sound("sounds/shoot.mpeg")
+sound_shoot.set_volume(0.1)
+sound_speed = pygame.mixer.Sound("sounds/speed.mpeg")
+sound_speed.set_volume(0.1)
 
 # Check collision between bullet and obstacle,
 # and kills them both if they collide
@@ -14,7 +23,7 @@ def bullet_obstacle_collide(score):
         collision = pygame.sprite.spritecollide(bullet, obstacles, True)
         if collision:
             bullet.kill()
-            
+            sound_collision.play()
             update_score()
 
 # Update score
@@ -31,12 +40,14 @@ def add_bullet():
     global bullets
     if len(bullets.sprites()) <= config.max_bullets_per_time:
         bullets.add(bullet.Bullet(gamer.sprite.get_top_coordinates()))
+        sound_shoot.play()
 
 
 # Adds an obstacle every time the event is triggered
 def add_obstacle():
     global obstacles
     obstacles.add(obstacle.Obstacle())
+
 
 
 # Get the initialized Screen instance
@@ -75,7 +86,6 @@ pygame.time.set_timer(obstacle_timer_vel, config.obstacle_timer_vel)
 # Game loop
 while True:
     for event in pygame.event.get():
-
         # Check if the user wants to exit
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -100,7 +110,9 @@ while True:
         # increase the speed of the comets
         if event.type == obstacle_timer_vel:
             config.ini_vel += config.dt_vel
-    
+            sound_speed.play()
+
+
     # Drawing the elements on the screen
     screen.blit(config.bg, (0, 0))
     screen.blit(text, textRect)

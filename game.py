@@ -86,8 +86,9 @@ def bullet_obstacle_collide():
             sound_collision.play()
             update_score()
 
+
 def update_last_score_text():
-    global last_score, last_score_rect,score
+    global last_score, last_score_rect, score
 
     last_score = font.render(f"You lost! Score: {score}", True, "white")
     last_score_rect = last_score.get_rect()
@@ -117,7 +118,6 @@ def update_score():
     score_text = font.render(f"Score: {score}", True, "white")
     score_text_rect = score_text.get_rect()
     score_text_rect.midleft = (5, 30)
-
 
 
 def reset_score():
@@ -214,7 +214,6 @@ def check_events():
 
 # Draws all the screen elements
 def draw_screen_elements():
-
     # Background
     screen.blit(config.bg, (0, 0))
 
@@ -238,7 +237,7 @@ def draw_screen_elements():
 
     # Start text
     if game_active is not True:
-        screen.blit(help_text,help_text_rect)
+        screen.blit(help_text, help_text_rect)
 
         if attempt != 0:
-            screen.blit(last_score,last_score_rect)
+            screen.blit(last_score, last_score_rect)

@@ -1,5 +1,6 @@
 import pygame
 import config
+import game
 from random import randint
 
 
@@ -13,7 +14,8 @@ class Obstacle(pygame.sprite.Sprite):
     def movement(self):
         self.rect.y += self.speed
 
-        if self.rect.top > config.screen_height + 10:
+        if self.rect.top > config.screen_height:
+            game.update_lives()
             self.kill()
 
     def update(self):
